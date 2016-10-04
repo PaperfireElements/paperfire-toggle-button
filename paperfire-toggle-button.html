@@ -1,34 +1,109 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymerfire/firebase-document.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
 
 <!--
 `paperfire-toggle-button`
 paper-toggle-button that syncs to firebase ref
 
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="paperfire-toggle-button">
-  <template>
+    <template>
     <style>
       :host {
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+    <firebase-document path="[[path]]" data="{{dataObject}}"></firebase-document>
+    <paper-toggle-button id="btnToggle" checked="{{checkedVal}}" on-tap="_onToggle" disabled="[[disabled]]"></paper-toggle-button>
+
   </template>
 
-  <script>
-    Polymer({
+    <script>
+        Polymer({
 
-      is: 'paperfire-toggle-button',
+            is: 'paperfire-toggle-button',
 
-      properties: {
-        prop1: {
-          type: String,
-          value: 'paperfire-toggle-button',
-        },
-      },
+            properties: {
+                path: String,
+                isChecked: {
+                    type: Boolean,
+                    reflectToAttribute: true,
+                    notify: true,
+                    value: false,
+                },
+                checkedVal: {
+                    type: Boolean,
+                    notify: true,
+                    observer: '_onToggle'
+                },
+                dataObject: {
+                    type: String,
+                    observer: '_onSync',
+                },
+                disabled: Boolean,
+                falseValue: String,
+                // name: String,
+                trueValue: String,
+            },
 
-    });
-  </script>
+            ready: function() {
+                if (this.trueValue) {
+
+                } else if (this.dataObject) {
+
+                }
+            },
+
+            _onSync: function(newVal) {
+                var checked = false;
+                if (newVal) {
+                    var initCheck = typeof newVal === 'object';
+                    console.log('SYNCING', newVal, initCheck);
+                    if (!initCheck) {
+                        if (this.trueValue) {
+                            if (this.trueValue == newVal) {
+                                checked = true;
+                            }
+                        } else if (this.falseValue) {
+                            if (newVal && this.falseValue != newVal) {
+                                checked = true;
+                            }
+                        } else if (newVal) {
+                            checked = true;
+                        }
+                    }
+                }
+                this._setToggle(checked);
+            },
+
+            _onToggle: function(event) {
+                var toggleState = this.$.btnToggle.__data__.checked;
+                console.log(this.$);
+                this.isChecked = toggleState;
+                if (toggleState) {
+                    if (this.trueValue) {
+                        this.dataObject = this.trueValue;
+                    } else {
+                        this.dataObject = true;
+                    }
+                } else {
+                    if (this.falseValue) {
+                        this.dataObject = this.falseValue;
+                    } else {
+                        this.dataObject = null;
+                    }
+                }
+            },
+
+            _setToggle: function(toggle) {
+                console.log('SET_TOGGLE', toggle);
+                this.checkedVal = toggle;
+                this.isChecked = toggle;
+            },
+
+        });
+    </script>
 </dom-module>

@@ -1,29 +1,55 @@
 <!doctype html>
 <html>
-  <head>
-    <title>paperfire-toggle-button demo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <head>
+        <title>paperfire-toggle-button demo</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+        <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../paperfire-toggle-button.html">
+        <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+        <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+        <link rel="import" href="../../polymerfire/firebase-app.html">
+        <link rel="import" href="../../paperfire-auth/paperfire-auth.html">
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-    </style>
-  </head>
-  <body>
+        <link rel="import" href="../paperfire-toggle-button.html">
 
-    <div class="vertical-section-container centered">
-      <h3>Basic paperfire-toggle-button Demo</h3>
-      <demo-snippet>
-        <template>
-          <paperfire-toggle-button></paperfire-toggle-button>
+        <style is="custom-style" include="demo-pages-shared-styles">
+
+        </style>
+    </head>
+
+    <body>
+        <firebase-app id="app" app-name="test" auth-domain="paperfireelements.firebaseapp.com" database-url="https://paperfireelements.firebaseio.com/" storage-bucket: "paperfireelements.appspot.com" api-key="AIzaSyBV90mRwJOGY7uO_RVWkchk9oUBx2E-sac" messagingSender-id="637337808974">
+        </firebase-app>
+        <paperfire-auth anon-login></paperfire-auth>
+        <div class="vertical-section-container centered">
+            <h3>Basic paperfire-toggle-button Demo</h3>
+            <demo-snippet>
+                <template>
+
+          <paperfire-toggle-button path="demo/paperfire-toggle-button/toggle" is-checked="{{isChecked}}"></paperfire-toggle-button>
         </template>
-      </demo-snippet>
-    </div>
+            </demo-snippet>
+            <h3>disabled paperfire-toggle-button Demo</h3>
+            <demo-snippet>
+                <template>
 
-  </body>
+          <paperfire-toggle-button path="demo/paperfire-toggle-button/toggle"  disabled>
+          </paperfire-toggle-button>
+
+                </template>
+            </demo-snippet>
+            <h3>Custom True/False Values paperfire-toggle-button Demo</h3>
+            <demo-snippet>
+                <template>
+
+          <paperfire-toggle-button path="demo/paperfire-toggle-button/customToggle" is-checked="{{customIsChecked}}" false-value="too bad" true-value="awesomeness!" ></paperfire-toggle-button>
+
+            </demo-snippet>
+
+        </div>
+
+    </body>
+
 </html>
