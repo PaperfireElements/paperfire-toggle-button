@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`paperfire-toggle-button`
+paper-toggle-button that syncs to firebase ref
+
+@demo demo/index.html 
+-->
+
+<dom-module id="paperfire-toggle-button">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'paperfire-toggle-button',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'paperfire-toggle-button',
+        },
+      },
+
+    });
+  </script>
+</dom-module>

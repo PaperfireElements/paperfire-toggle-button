@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>paperfire-toggle-button test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../paperfire-toggle-button.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <paperfire-toggle-button></paperfire-toggle-button>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('paperfire-toggle-button', function() {
+
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'paperfire-toggle-button');
+        });
+
+      });
+    </script>
+  </body>
+</html>
